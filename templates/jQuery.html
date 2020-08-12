@@ -1,0 +1,66 @@
+<script type=text/javascript>
+    $(function() {
+        var finish = false;
+        var sec = 0;
+
+        function pad(val) {
+            return val > 9 ? val : "0" + val;
+        }
+
+        var inter = setInterval(function() {
+            document.getElementById("seconds").innerHTML = pad(++sec % 60);
+            document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+        }, 1000);
+
+        function myStopFunction() {
+            clearInterval(inter);
+        }
+
+
+
+
+        var position;
+        var cellText;
+        $('.emptyCell').click(function() {
+            console.log("$(this).attr('id'): " + $(this).attr('id'));
+            console.log("$(this).text('id'): " + $(this).text());
+            position = $(this).attr('id');
+
+            boo = true;
+        });
+        $('.button').click(function() {
+            console.log($(this).attr('id'));
+            var number = $(this).attr('id');
+            if (boo) {
+                cellText = $('#' + position).text();
+                $.getJSON('/checkvalid', {
+                    position: position,
+                    number: number,
+                    cellText: cellText
+                }, function(data) {
+                    console.log("/checkvalid: data.check: " + data.check);
+                    console.log("/checkvalid: data.number: " + data.number);
+                    console.log("/checkvalid: data.cellText: " + data.cellText);
+                    if (data.check) {
+                        $('#' + position).removeClass("wrongCell");
+                        $('#' + position).text(data.number);
+                    } else {
+                        $('#' + position).addClass("wrongCell");
+                        $('#' + position).text(data.number);
+                    }
+                });
+                $.getJSON('/checkfinish', {}, function(data) {
+                    console.log("/checkfinish: data.finish: " + data.finish);
+                    if (data.finish) {
+                        $('h1').text("Finish!");
+                        finish = data.finish;
+                        myStopFunction();
+                        $('#finishBlock').height(375.33);
+                    }
+                });
+                // boo = false;
+                return false;
+            }
+        });
+    });
+</script>

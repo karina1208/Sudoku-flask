@@ -1,0 +1,152 @@
+body {
+    font-family: 'century gothic', sans-serif;
+    background-color: #f5f4f3;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: 50px 0px 50px 0px;
+    /* width: 800px; */
+    width: 100%;
+    height: 550px;
+    background-color: #ffffff;
+    position: relative;
+    /* border-radius: 25px; */
+    box-shadow: 0px 0px 17px -9px rgba(186, 178, 171, 1);
+}
+
+h1 {
+    margin: 0px;
+    color: rgb(156, 140, 115);
+}
+
+.sudoku {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#top {
+    height: 39px;
+    line-height: 39px;
+    margin-bottom: 20px;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    display: flex;
+}
+
+#timer {
+    vertical-align: middle;
+    text-align: right;
+    font-size: 25px;
+    color: rgb(156, 140, 115);
+}
+
+#finishBlock {
+    line-height: 375.33px;
+    /* height: 375.33px; */
+    height: 0px;
+    width: 100%;
+    position: absolute;
+    background-color: #eceae6;
+    z-index: 99;
+    opacity: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    position: relative;
+    border-collapse: collapse;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.table tr td {
+    height: 39px;
+    width: 39px;
+}
+
+tr {
+    line-height: 5px;
+    min-height: 5px;
+    height: 13px;
+}
+
+.oriCell,
+.emptyCell,
+.wrongCell {
+    font-size: 30px;
+    color: #696661;
+    text-align: center;
+    border: solid 1px rgb(172, 169, 163);
+}
+
+.emptyCell {
+    color: rgb(156, 140, 115);
+}
+
+.wrongCell {
+    color: rgb(218, 64, 64);
+}
+
+tr:nth-child(3n) {
+    border-bottom: solid 1.9px rgb(156, 140, 115);
+}
+
+tr:first-child {
+    border-top: solid 1.9px rgb(156, 140, 115);
+}
+
+td:nth-child(3n) {
+    border-right: solid 1.9px rgb(156, 140, 115);
+    ;
+}
+
+td:first-child {
+    border-left: solid 1.9px rgb(156, 140, 115);
+    ;
+}
+
+.buttonWrap {
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    font-family: 'century gothic', sans-serif;
+    width: 39px;
+    height: 39px;
+    font-size: 25px;
+    color: rgb(182, 170, 152);
+    background-color: #eceae6;
+    border: 0px;
+    margin: 0px;
+    float: left;
+    line-height: 5px;
+    min-height: 5px;
+}
+
+.button:hover {
+    color: rgb(230, 225, 219);
+    background-color: rgb(172, 161, 143);
+}
+
+.button:focus {
+    outline: none;
+}
+
+#game {
+    width: auto;
+    font-weight: bold;
+}

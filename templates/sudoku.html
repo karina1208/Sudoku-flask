@@ -1,0 +1,29 @@
+<div class="sudoku">
+    <div id="top">
+        <h1>Sudoku</h1>
+        <div id="timer"><label id="minutes">00</label>:<label id="seconds">00</label></div>
+        <button class="button" id="game">New Game</button>
+    </div>
+
+
+    <table class="table">
+        <tbody>
+            {% for i in range(playBoard|length) %}
+            <tr>
+                {% for j in range(playBoard[0]|length) %} {% if playBoard[i][j] == 0 %}
+                <td class="emptyCell" id={{i*9+j}}></td>
+                {% else %}
+                <td class="oriCell" id={{i*9+j}}>{{playBoard[i][j]}}</td>
+                {% endif %} {%endfor%}
+            </tr>
+            {%endfor%}
+        </tbody>
+        <div id="finishBlock"></div>
+    </table>
+
+
+    <div class="buttonWrap">
+        {% for i in range(1,10)%}
+        <button class="button" id="{{i}}">{{i}} </button> {% endfor %}
+    </div>
+</div>
