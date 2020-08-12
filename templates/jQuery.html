@@ -1,5 +1,6 @@
 <script type=text/javascript>
     $(function() {
+        //count time
         var finish = false;
         var sec = 0;
 
@@ -15,9 +16,54 @@
         function myStopFunction() {
             clearInterval(inter);
         }
+        //end of count time
 
         var position;
         var cellText;
+
+        //highlight related cell
+        $('td').click(function() {
+            $('td').removeClass("highlight highlightSelf");
+            position = $(this).attr('id');
+            cellText = $('#' + position).text();
+
+            posX = Math.floor(position / 9)
+            posY = position % 9
+
+            var box_x = Math.floor(posY / 3)
+            var box_y = Math.floor(posX / 3)
+
+            //add row
+            var i;
+            for (i = 0; i < 9; i++) {
+                cellNo = posX * 9 + i;
+                console.log("add row" + cellNo);
+                $('#' + cellNo).addClass("highlight");
+            }
+
+            //add col
+            for (i = 0; i < 9; i++) {
+                cellNo = i * 9 + posY;
+                console.log("add col" + cellNo);
+                $('#' + cellNo).addClass("highlight");
+            }
+
+            for (i = box_y * 3; i < box_y * 3 + 3; i++) {
+                for (j = box_x * 3; j < box_x * 3 + 3; j++) {
+                    cellNo = i * 9 + j;
+                    console.log("add col" + cellNo);
+                    $('#' + cellNo).addClass("highlight");
+                }
+            }
+
+            $('#' + position).addClass("highlightSelf");
+
+
+
+        });
+        //end of highlight related cell
+
+        //insert number in cell
         $('.emptyCell').click(function() {
             console.log("$(this).attr('id'): " + $(this).attr('id'));
             console.log("$(this).text('id'): " + $(this).text());
@@ -28,6 +74,8 @@
         $('.button').click(function() {
             console.log($(this).attr('id'));
             var number = $(this).attr('id');
+
+            //only if both cell and number are clicked
             if (boo) {
                 cellText = $('#' + position).text();
                 $.getJSON('/checkvalid', {
@@ -56,9 +104,10 @@
                         $('#finishBlock').height(375.33);
                     }
                 });
-                // boo = false;
                 return false;
             }
         });
+
+        //end of insert number in cell
     });
 </script>

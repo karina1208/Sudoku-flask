@@ -73,7 +73,7 @@ def checkfinish():
     if not find:
         return jsonify(finish=True)
     else: 
-        return jsonify(finish=False)
+        return jsonify(finish=False) 
 
 #if the number is valid, insert it in the playboard
 def insertToCell(bo, num, pos):

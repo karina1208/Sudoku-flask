@@ -97,6 +97,14 @@ tr {
     color: rgb(218, 64, 64);
 }
 
+.highlight {
+    background-color: #f5f4f3;
+}
+
+.highlightSelf {
+    background-color: #e2ddd7;
+}
+
 tr:nth-child(3n) {
     border-bottom: solid 1.9px rgb(156, 140, 115);
 }
