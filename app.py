@@ -18,7 +18,7 @@ board = [
     ]
 
 #initial page
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST','GET'])
 def index():
     global board
     #reset board each time
@@ -40,7 +40,7 @@ def index():
     return render_template('index.html', playBoard=board)
 
 #get and return jSON data of cell
-@app.route('/checkvalid', methods=['GET'])
+@app.route('/checkvalid', methods=['POST','GET'])
 def checkvalid():
     position = request.args.get('position', 0, type=int)
     number = request.args.get('number', 0, type=int)
