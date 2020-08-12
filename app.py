@@ -95,7 +95,7 @@ def gen_board(bo): #gen whole board
 
 def gen_playBoard(bo): #gen play board with random empty cell
     i = 1
-    while i<=10:
+    while i<=30:
         bo[random.randint(0, 8)][random.randint(0, 8)] = 0
         i += 1
 
