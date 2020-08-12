@@ -16,9 +16,6 @@
             clearInterval(inter);
         }
 
-
-
-
         var position;
         var cellText;
         $('.emptyCell').click(function() {
@@ -55,6 +52,7 @@
                         $('h1').text("Finish!");
                         finish = data.finish;
                         myStopFunction();
+                        boo = false;
                         $('#finishBlock').height(375.33);
                     }
                 });
