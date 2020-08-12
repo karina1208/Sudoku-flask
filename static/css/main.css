@@ -137,10 +137,11 @@ td:first-child {
     min-height: 5px;
 }
 
-.button:hover {
+
+/* .button:hover {
     color: rgb(230, 225, 219);
     background-color: rgb(172, 161, 143);
-}
+} */
 
 .button:focus {
     outline: none;
@@ -149,4 +150,24 @@ td:first-child {
 #game {
     width: auto;
     font-weight: bold;
+}
+
+
+/* Portrait */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+    .button {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        color: rgb(182, 170, 152);
+        background-color: #eceae6;
+        line-height: 35px;
+    }
+    h1 {
+        font-size: 25px;
+    }
+    #timer {
+        font-size: 15px;
+    }
 }
