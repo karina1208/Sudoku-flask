@@ -89,6 +89,9 @@
                     console.log("/checkvalid: data.check: " + data.check);
                     console.log("/checkvalid: data.number: " + data.number);
                     console.log("/checkvalid: data.cellText: " + data.cellText);
+                    if (cellText == null) {
+                        $('#' + position).removeClass("wrongCell");
+                    }
                     if (data.check) {
                         $('#' + position).removeClass("wrongCell");
                         $('#' + position).text(data.number);
