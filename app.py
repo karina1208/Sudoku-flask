@@ -78,15 +78,15 @@ def checkvalid():
     posX = position // 9
     posY = position % 9
 
+    if (cellText == number):
+        insertToCell(board, 0, (posX, posY))
+        number = None
+
     check = checkAnswer(ansboard, number, (posX, posY))
     
     if check:
         #only if the number is valid, the input will be insert to the array list
         insertToCell(board, number, (posX, posY))
-
-    if (cellText == number):
-        insertToCell(board, 0, (posX, posY))
-        number = None
 
     #console log
     #app.logger.info(board)
