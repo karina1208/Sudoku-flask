@@ -81,6 +81,7 @@
             //only if both cell and number are clicked
             if (boo) {
                 cellText = $('#' + position).text();
+
                 $.getJSON('/checkvalid', {
                     position: position,
                     number: number,
@@ -89,9 +90,7 @@
                     console.log("/checkvalid: data.check: " + data.check);
                     console.log("/checkvalid: data.number: " + data.number);
                     console.log("/checkvalid: data.cellText: " + data.cellText);
-                    if (cellText == null) {
-                        $('#' + position).removeClass("wrongCell");
-                    }
+
                     if (data.check) {
                         $('#' + position).removeClass("wrongCell");
                         $('#' + position).text(data.number);
@@ -99,6 +98,12 @@
                         $('#' + position).addClass("wrongCell");
                         $('#' + position).text(data.number);
                     }
+
+                    if (data.number == null) {
+                        console.log("///////data.cellText == null///////")
+                        $('#' + position).removeClass("wrongCell");
+                    }
+
                 });
                 $.getJSON('/checkfinish', {}, function(data) {
                     console.log("/checkfinish: data.finish: " + data.finish);
