@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, jsonify
 from datetime import datetime
-import random
+import random, copy 
 
 app = Flask(__name__)
 
@@ -17,11 +17,23 @@ board = [
         [0,0,0,0,0,0,0,0,0]
     ]
 
+ansboard = [
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0]
+    ]
+
 #initial page
 @app.route('/', methods=['POST','GET'])
 def index():
-    global board
     #reset board each time
+    global board
     board = [
         [0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0],
@@ -33,9 +45,27 @@ def index():
         [0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0]
     ]
+    global ansboard
+    ansboard = [
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0]
+    ]
+
     gen_board(board)
-    solve(board)
+    #solve(board)
+    #save all number in ansboard
+    ansboard = copy.deepcopy(board)
     gen_playBoard(board)
+
+    app.logger.info(board)
+    app.logger.info(ansboard)
 
     return render_template('index.html', playBoard=board)
 
@@ -48,7 +78,7 @@ def checkvalid():
     posX = position // 9
     posY = position % 9
 
-    check = valid(board, number, (posX, posY))
+    check = checkAnswer(ansboard, number, (posX, posY))
     
     if check:
         #only if the number is valid, the input will be insert to the array list
@@ -58,7 +88,13 @@ def checkvalid():
         insertToCell(board, 0, (posX, posY))
         number = None
 
-    app.logger.info(check) #console log
+    #console log
+    #app.logger.info(board)
+    #app.logger.info(number)
+    #app.logger.info(posX)
+    #app.logger.info(posY)
+    #app.logger.info(cellText)
+    #app.logger.info(check) 
 
     return jsonify(number=number,check=check,cellText=cellText)
 
@@ -93,6 +129,8 @@ def gen_board(bo): #gen whole board
     for i in range(1,9):
         bo[i][0] = iCol[i-1]
 
+    solve(bo)
+
 def gen_playBoard(bo): #gen play board with random empty cell
     i = 1
     while i<=30:
@@ -106,6 +144,12 @@ def find_empty(bo):
                 return (i, j) # row, col
     
     return None
+
+def checkAnswer(bo2, num, pos):
+    if num == bo2[pos[0]][pos[1]]:
+        return True
+    
+    return False
 
 def valid(bo, num, pos):
     #check row
@@ -146,10 +190,6 @@ def solve(bo):
             bo[row][col] = 0
     
     return False
-
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)

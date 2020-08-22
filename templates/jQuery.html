@@ -18,17 +18,17 @@
         }
         //end of count time
 
-        var position;
-        var cellText;
+
 
         //highlight related cell
         $('td').click(function() {
             $('td').removeClass("highlight highlightSelf");
-            position = $(this).attr('id');
-            cellText = $('#' + position).text();
 
-            posX = Math.floor(position / 9)
-            posY = position % 9
+            var tdPosition = $(this).attr('id');
+            var tdCellText = $('#' + tdPosition).text();
+
+            posX = Math.floor(tdPosition / 9)
+            posY = tdPosition % 9
 
             var box_x = Math.floor(posY / 3)
             var box_y = Math.floor(posX / 3)
@@ -37,31 +37,34 @@
             var i;
             for (i = 0; i < 9; i++) {
                 cellNo = posX * 9 + i;
-                console.log("add row" + cellNo);
+                //console.log("add row" + cellNo);
                 $('#' + cellNo).addClass("highlight");
             }
 
             //add col
             for (i = 0; i < 9; i++) {
                 cellNo = i * 9 + posY;
-                console.log("add col" + cellNo);
+                //console.log("add col" + cellNo);
                 $('#' + cellNo).addClass("highlight");
             }
 
             for (i = box_y * 3; i < box_y * 3 + 3; i++) {
                 for (j = box_x * 3; j < box_x * 3 + 3; j++) {
                     cellNo = i * 9 + j;
-                    console.log("add col" + cellNo);
+                    //console.log("add col" + cellNo);
                     $('#' + cellNo).addClass("highlight");
                 }
             }
 
-            $('#' + position).addClass("highlightSelf");
+            $('#' + tdPosition).addClass("highlightSelf");
 
 
 
         });
         //end of highlight related cell
+
+        var position;
+        var cellText;
 
         //insert number in cell
         $('.emptyCell').click(function() {
